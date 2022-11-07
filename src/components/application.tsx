@@ -8,13 +8,15 @@
  * React.ReactChild[];
  */
 
-type BoxProps = { children: any /* 👈 Get rid of this! */ };
+import React, { PropsWithChildren } from 'react';
 
-const Box = ({ children }: BoxProps) => {
+type BoxProps = { color?: 'red' | 'green' | 'blue' };
+
+const Box = ({ children, color = 'red' }: PropsWithChildren & BoxProps) => {
   return (
     <section
       className="m-4"
-      style={{ padding: '1em', border: '5px solid purple' }}
+      style={{ padding: '1em', border: '5px solid purple', color }}
     >
       {children}
     </section>
@@ -24,7 +26,7 @@ const Box = ({ children }: BoxProps) => {
 const Application = () => {
   return (
     <main className="m-8">
-      <Box>
+      <Box color="green">
         Just a string.
         <p>Some HTML that is not nested.</p>
         <Box>
